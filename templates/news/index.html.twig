@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}News index{% endblock %}
+
+{% block body %}
+
+    <h1>
+    <center>Новостной портал</center>
+    </h1> 
+    <div class="container">
+        <div class="row row-cols-3">
+            {% for news in news %}
+                <div class="col mb-5">
+                    <div class="card bg-light" style="height:450px;">
+                        <div class="card-body">
+                            <a  href="{{ path('news_show', {'id': news.id}) }}"" class="card-link ">
+                            <h5 style="overflow-Y: auto; height:30%;">{{ news.name }}</h5></a>
+                            <p class="card-text border-top border-bottom" style="overflow-Y: auto; height:45%;">{{ news.annotation }}</p>
+                            Дата публикации:   
+                            <span class="ml-4 mb-3 card-text badge badge-info">{{ news.date ? news.date|date('Y-m-d H:i:s') : '' }}</span>
+                            Количество коментариев:
+                            <span class="badge badge-info card-text ml-4">{{ news.comment|length}}</span>
+                            Количество просмотров:
+                            <span class="badge badge-info card-text ml-4">{{ news.countView }}</span>
+                        </div>
+                    </div>  
+                </div>
+            {% else %}
+            
+                <h5>no records found</h5>
+             {% endfor %}
+        </div>
+    </div>
+{% endblock %}
